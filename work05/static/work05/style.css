@@ -1,0 +1,8 @@
+body {
+    background-color: #33e44b;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    color: hsl(0, 0%, 20%);
+}

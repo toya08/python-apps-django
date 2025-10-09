@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>My Page</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'work05/style.css' %}">
+</head>
+
+
+<body>
+    <h1>こんにちは、{{ name }}さん</h1>
+    <p>This is the index page of the work05 application.</p>
+
+    <img src="{% static 'work05/images/image.png' %}" alt="サンプル画像">
+
+</body>
+
+</html>
