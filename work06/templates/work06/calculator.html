@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>四則演算計算機</title>
+    <style>
+        body {
+            font-family: "Hiragino Kaku Gothic ProN", sans-serif;
+            margin: 40px;
+        }
+
+        h1 {
+            font-size: 2em;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 5px 15px;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .error {
+            color: red;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>四則演算計算機</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">計算する</button>
+    </form>
+
+    {% if result %}
+    <p class="result">結果：{{ result }}</p>
+    {% endif %}
+    {% if error %}
+    <p class="error">{{ error }}</p>
+    {% endif %}
+</body>
+
+</html>
