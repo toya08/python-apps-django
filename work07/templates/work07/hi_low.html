@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hi & Lowゲーム</title>
+    <link rel="stylesheet" href="{% static 'work07/style.css' %}">
+</head>
+
+<body>
+    <h1>Hi & Lowゲーム</h1>
+    <p>前のカード: <span id="prev">？</span></p>
+    <div class="game-links">
+        <button onclick="guess('hi')">Hi</button>
+        <button onclick="guess('low')">Low</button>
+    </div>
+    <p id="result">結果：？？？</p>
+
+
+    <!-- 戻るボタン -->
+    <a href="{% url 'index' %}" class="back-btn">トップページに戻る</a>
+
+    <script>
+        function guess(userGuess) {
+            fetch("{% url 'hi_low_result' %}?guess=" + userGuess)
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('prev').textContent = data.next;
+                    document.getElementById('result').textContent = data.result;
+                })
+                .catch(err => console.error(err));
+        }
+    </script>
+</body>
+
+</html>

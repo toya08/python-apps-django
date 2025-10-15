@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>じゃんけんゲーム</title>
+    <link rel="stylesheet" href="{% static 'work07/style.css' %}">
+</head>
+
+<body>
+    <h1>じゃんけんゲーム</h1>
+    <div class="game-links">
+        <button onclick="play('グー')">グー</button>
+        <button onclick="play('チョキ')">チョキ</button>
+        <button onclick="play('パー')">パー</button>
+    </div>
+    <p id="result">結果：？？？</p>
+
+    <!-- 戻るボタン -->
+    <a href="{% url 'index' %}" class="back-btn">トップページに戻る</a>
+
+    <script>
+        function play(choice) {
+            fetch("{% url 'janken_result' %}?choice=" + choice)
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('result').textContent =
+                        `あなた: ${data.user} | CPU: ${data.cpu} → ${data.result}`;
+                })
+                .catch(err => console.error(err));
+        }
+    </script>
+</body>
+
+</html>

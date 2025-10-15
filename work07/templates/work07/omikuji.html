@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>おみくじ</title>
+    <link rel="stylesheet" href="{% static 'work07/style.css' %}">
+</head>
+
+<body>
+    <h1>おみくじ</h1>
+    <button id="drawBtn">おみくじを引く</button>
+    <p id="result">結果： ？？？</p>
+
+    <!-- 戻るボタン -->
+    <a href="{% url 'index' %}" class="back-btn">トップページに戻る</a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btn = document.getElementById('drawBtn');
+            btn.addEventListener('click', () => {
+                fetch("{% url 'omikuji_result' %}")
+                    .then(res => res.json())
+                    .then(data => {
+                        document.getElementById('result').textContent = '結果： ' + data.result;
+                    })
+                    .catch(err => console.error('通信エラー:', err));
+            });
+        });
+    </script>
+</body>
+
+</html>
