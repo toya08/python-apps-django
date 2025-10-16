@@ -1,0 +1,16 @@
+<h1>メモ帳アプリ（work08）</h1>
+
+{% if memos %}
+<ul>
+    {% for memo in memos %}
+    <li>
+        <strong>{{ memo.title }}</strong><br>
+        {{ memo.content|linebreaksbr }}<br>
+        <small>更新日時: {{ memo.updated_at }}</small>
+    </li>
+    <hr>
+    {% endfor %}
+</ul>
+{% else %}
+<p>まだメモがありません。</p>
+{% endif %}
