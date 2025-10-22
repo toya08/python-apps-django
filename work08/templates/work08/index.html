@@ -1,16 +1,25 @@
-<h1>メモ帳アプリ（work08）</h1>
+{% load static %}
 
-{% if memos %}
+<head>
+    <link rel="stylesheet" href="{% static 'work08/style.css' %}">
+</head>
+
+<h1>メモ帳アプリ</h1>
+
+<form action="{% url 'create_memo' %}" method="post" style="display:inline;">
+    {% csrf_token %}
+    <button type="submit" class="primaryBtn">＋ 新しいメモを作成</button>
+</form>
+
+
 <ul>
     {% for memo in memos %}
     <li>
-        <strong>{{ memo.title }}</strong><br>
-        {{ memo.content|linebreaksbr }}<br>
-        <small>更新日時: {{ memo.updated_at }}</small>
+        <a href="{% url 'edit_memo' memo.id %}">{{ memo.title }}</a><br>
+        {{ memo.updated_at }}
+        <a href="{% url 'delete_memo' memo.id %}" onclick="return confirm('削除しますか？')">削除</a>
     </li>
-    <hr>
+    {% empty %}
+    <p>まだメモがありません。</p>
     {% endfor %}
 </ul>
-{% else %}
-<p>まだメモがありません。</p>
-{% endif %}

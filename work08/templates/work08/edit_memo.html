@@ -1,0 +1,44 @@
+{% load static %}
+
+<head>
+    <link rel="stylesheet" href="{% static 'work08/style.css' %}">
+</head>
+
+<h1>メモ帳アプリ - 編集</h1>
+
+<form method="post" id="memoForm" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">保存</button>
+</form>
+
+<form action="{% url 'index' %}" method="get" style="display:inline;"
+    onsubmit="return confirm('変更が保存されていません。本当に戻りますか？');">
+    <button type="submit" class="backBtn">一覧に戻る（保存しない）</button>
+</form>
+
+<form action="{% url 'delete_memo' memo.id %}" method="post" style="display:inline;"
+    onsubmit="return confirm('削除しますか？');">
+    {% csrf_token %}
+    <button type="submit" class="deleteBtn">削除</button>
+</form>
+
+
+<script>
+    const form = document.getElementById("memoForm");
+    const backLink = document.getElementById("backLink");
+    let isChanged = false;
+
+    form.addEventListener("input", () => {
+        isChanged = true;
+    });
+
+    backLink.addEventListener("click", (e) => {
+        if (isChanged) {
+            const confirmLeave = confirm("変更が保存されていません。本当に戻りますか？");
+            if (!confirmLeave) {
+                e.preventDefault();
+            }
+        }
+    });
+</script>

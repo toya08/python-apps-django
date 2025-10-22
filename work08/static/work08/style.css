@@ -1,0 +1,125 @@
+/* 全体 */
+body {
+    font-family: "Helvetica", "Arial", sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 20px;
+}
+
+/* 見出し */
+h1 {
+    color: #333;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+/* 新規作成ボタン */
+a#createMemoBtn {
+    display: inline-block;
+    padding: 8px 12px;
+    margin-bottom: 20px;
+    background-color: #4caf50;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+a#createMemoBtn:hover {
+    background-color: #45a049;
+}
+
+/* メモリスト */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+/* メモタイトルリンク */
+li a {
+    font-weight: bold;
+    color: #333;
+    text-decoration: none;
+}
+
+li a:hover {
+    text-decoration: underline;
+}
+
+/* 削除リンク */
+li a.deleteLink {
+    color: red;
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+li a.deleteLink:hover {
+    text-decoration: underline;
+}
+
+/* フォーム */
+form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+form button {
+    padding: 8px 12px;
+    background-color: #2196f3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+}
+
+form button:hover {
+    background-color: #1976d2;
+}
+
+
+.primaryBtn {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.primaryBtn:hover {
+    background-color: #45a049;
+}
+
+.deleteBtn {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 4px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.deleteBtn:hover {
+    background-color: #d32f2f;
+}
+
+.backBtn {
+    background-color: #757575;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.backBtn:hover {
+    background-color: #616161;
+}
