@@ -24,7 +24,7 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production 
+# Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -168,7 +168,6 @@ TEMPLATES = [
     },
 ]
 
-
 # 環境変数から接続情報を取得する
 DATABASE_HOST = os.environ.get("DB_HOST")
 DATABASE_NAME = os.environ.get("DB_NAME")
@@ -177,14 +176,13 @@ DATABASE_PASSWORD = os.environ.get("DB_PASSWORD")
 DATABASE_PORT = os.environ.get("DB_PORT") or "3306"
 
 # データベース接続設定
-
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": config("MYSQLDATABASE"),
-        "USER": config("MYSQLUSER"),
-        "PASSWORD": config("MYSQLPASSWORD"),
-        "HOST": config("MYSQLHOST"),
-        "PORT": config("MYSQLPORT", default="3306"),
+        "NAME": DATABASE_NAME,
+        "USER": DATABASE_USER,
+        "PASSWORD": DATABASE_PASSWORD,
+        "HOST": DATABASE_HOST,
+        "PORT": DATABASE_PORT,
     }
 }
