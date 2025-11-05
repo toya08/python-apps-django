@@ -15,6 +15,9 @@ import os
 
 from dotenv import load_dotenv
 
+# データベース接続設定
+from decouple import config
+
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -30,8 +33,13 @@ SECRET_KEY = "django-insecure-#hhl&h(he5vtnux@$jh)pr6n!97tq$(z==kt!21vx9+l!x30^7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["python-apps-django-production-c925.up.railway.app"]
-
+# ALLOWED_HOSTS = ["python-apps-django-production-c925.up.railway.app"]
+# ALLOWED HOSTS CSRF_TRUSTED_ORIGINS を設定
+# deploy setting for Railway
+# ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = (os.environ.get("ALLOWED_HOSTS") or "").split(",")  # deploy for Railway
+CSRF_TRUSTED_ORIGINS = (os.environ.get("CSRF_TRUSTED_ORIGINS") or "").split(",")
 
 # Application definition
 
@@ -130,6 +138,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = "static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_DIRS = [BASE_DIR / "static"]
+
+# WhiteNoise configuration for serving static files in production
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -163,13 +176,14 @@ DATABASE_PASSWORD = os.environ.get("DB_PASSWORD")
 DATABASE_PORT = os.environ.get("DB_PORT") or "3306"
 
 # データベース接続設定
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": DATABASE_NAME,
-        "USER": DATABASE_USER,
-        "PASSWORD": DATABASE_PASSWORD,
-        "HOST": DATABASE_HOST,
-        "PORT": DATABASE_PORT,
+        "NAME": config("MYSQLDATABASE"),
+        "USER": config("MYSQLUSER"),
+        "PASSWORD": config("MYSQLPASSWORD"),
+        "HOST": config("MYSQLHOST"),
+        "PORT": config("MYSQLPORT", default="3306"),
     }
 }
