@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     "work07",
     "work08",
     "work09",
+    "budgetmate",
 ]
 
 MIDDLEWARE = [
@@ -169,11 +170,11 @@ TEMPLATES = [
 ]
 
 # 環境変数から接続情報を取得する
-DATABASE_HOST = os.environ.get("DB_HOST")
-DATABASE_NAME = os.environ.get("DB_NAME")
-DATABASE_USER = os.environ.get("DB_USER")
-DATABASE_PASSWORD = os.environ.get("DB_PASSWORD")
-DATABASE_PORT = os.environ.get("DB_PORT") or "3306"
+DATABASE_HOST = os.environ.get("DB_HOST", "localhost")
+DATABASE_NAME = os.environ.get("DB_NAME", "python_app")
+DATABASE_USER = os.environ.get("DB_USER", "root")
+DATABASE_PASSWORD = os.environ.get("DB_PASSWORD", "0118")
+DATABASE_PORT = os.environ.get("DB_PORT", "3306")
 
 # データベース接続設定
 DATABASES = {
