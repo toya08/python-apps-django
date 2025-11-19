@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>BudgetMate ダッシュボード</title>
+</head>
+
+<body>
+    <h1>BudgetMate ダッシュボード</h1>
+
+    <h2>収入</h2>
+    <ul>
+        {% for income in incomes %}
+        <li>{{ income.date }} - {{ income.source }} : {{ income.amount }}円</li>
+        {% empty %}
+        <li>データがありません</li>
+        {% endfor %}
+    </ul>
+
+    <h2>支出</h2>
+    <ul>
+        {% for expense in expenses %}
+        <li>{{ expense.date }} - {{ expense.category }} : {{ expense.amount }}円</li>
+        {% empty %}
+        <li>データがありません</li>
+        {% endfor %}
+    </ul>
+
+    <h2>貯金目標</h2>
+    <ul>
+        {% for goal in goals %}
+        <li>{{ goal.goal_name }} - {{ goal.target_amount }}円, {{ goal.target_date }}まで (1ヶ月あたり: {{ goal.monthly_saving
+            }}円)</li>
+        {% empty %}
+        <li>目標がありません</li>
+        {% endfor %}
+    </ul>
+
+</body>
+
+</html>

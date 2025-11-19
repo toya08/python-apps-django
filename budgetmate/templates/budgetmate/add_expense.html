@@ -1,0 +1,6 @@
+<h1>支出を追加</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">追加</button>
+</form>

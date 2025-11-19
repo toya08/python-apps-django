@@ -2,7 +2,6 @@ from django.db import models
 from django.utils import timezone
 
 
-# Create your models here.
 class Income(models.Model):
     date = models.DateField(default=timezone.now)
     amount = models.PositiveIntegerField()
