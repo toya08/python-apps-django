@@ -1,6 +1,11 @@
 <h1>貯金目標を追加</h1>
-<form method="post">
+
+<form method="POST">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">追加</button>
 </form>
+
+
+<br>
+<a href="{% url 'dashboard' %}">← ダッシュボードへ戻る</a>

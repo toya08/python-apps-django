@@ -1,42 +1,58 @@
-<!DOCTYPE html>
-<html lang="ja">
+<h1>BudgetMate ダッシュボード</h1>
 
-<head>
-    <meta charset="UTF-8">
-    <title>BudgetMate ダッシュボード</title>
-</head>
+<div>
+    <a href="{% url 'add_income' %}">
+        <button>＋ 収入を追加</button>
+    </a>
 
-<body>
-    <h1>BudgetMate ダッシュボード</h1>
+    <a href="{% url 'add_expense' %}">
+        <button>－ 支出を追加</button>
+    </a>
 
-    <h2>収入</h2>
-    <ul>
-        {% for income in incomes %}
-        <li>{{ income.date }} - {{ income.source }} : {{ income.amount }}円</li>
-        {% empty %}
-        <li>データがありません</li>
-        {% endfor %}
-    </ul>
+    <a href="{% url 'add_saving_goal' %}">
+        <button>🎯 貯金目標を追加</button>
+    </a>
+</div>
 
-    <h2>支出</h2>
-    <ul>
-        {% for expense in expenses %}
-        <li>{{ expense.date }} - {{ expense.category }} : {{ expense.amount }}円</li>
-        {% empty %}
-        <li>データがありません</li>
-        {% endfor %}
-    </ul>
+<hr>
 
-    <h2>貯金目標</h2>
-    <ul>
-        {% for goal in goals %}
-        <li>{{ goal.goal_name }} - {{ goal.target_amount }}円, {{ goal.target_date }}まで (1ヶ月あたり: {{ goal.monthly_saving
-            }}円)</li>
-        {% empty %}
-        <li>目標がありません</li>
-        {% endfor %}
-    </ul>
+<h2>収入</h2>
+<a href="{% url 'add_income' %}">
+    <button class="add-btn">追加</button>
+</a>
 
-</body>
+<ul>
+    {% for i in incomes %}
+    <li>
+        {{ i.date }} - {{ i.source }} : {{ i.amount }}円
+        <a href="{% url 'delete_income' i.id %}">
+            <button class="delete-btn">削除</button>
+        </a>
+    </li>
+    {% endfor %}
+</ul>
 
-</html>
+
+<h2>支出一覧</h2>
+{% for e in expenses %}
+<p>
+    {{ e.date }} - {{ e.category }}：{{ e.amount }}円
+    <a href="">
+        <button>削除</button>
+    </a>
+</p>
+{% empty %}
+<p>まだ支出が登録されていません</p>
+{% endfor %}
+
+<h2>貯金目標一覧</h2>
+{% for g in goals %}
+<p>
+    {{ g.goal_name }}：{{ g.target_amount }}円 ({{ g.target_date }}まで)
+    <a href="">
+        <button>削除</button>
+    </a>
+</p>
+{% empty %}
+<p>まだ貯金目標が登録されていません</p>
+{% endfor %}

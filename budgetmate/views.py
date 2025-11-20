@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect  # ここがポイント
+from django.shortcuts import render, redirect, get_object_or_404  # ここがポイント
 from .models import Income, Expense, SavingGoal
 from .forms import IncomeForm, ExpenseForm, SavingGoalForm
 
@@ -29,6 +29,12 @@ def add_income(request):
     else:
         form = IncomeForm()
     return render(request, "budgetmate/add_income.html", {"form": form})
+
+
+def delete_income(request, income_id):
+    income = get_object_or_404(Income, id=income_id)
+    income.delete()
+    return redirect("dashboard")
 
 
 def add_expense(request):
