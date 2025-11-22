@@ -1,17 +1,335 @@
+body {
+    font-family: "Noto Sans JP", sans-serif;
+    background-color: #f0f4f8;
+    margin: 0;
+    padding: 0 1rem;
+}
+
+h1 {
+    text-align: center;
+    color: #2a5d9f;
+    margin: 1rem 0;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
 .add-btn {
-    background-color: #4CAF50;
-    color: white;
+    background-color: #a3d5ff;
     border: none;
-    padding: 5px 10px;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.add-btn:hover {
+    background-color: #7cc0ff;
+}
+
+.card-container h2 {
+    margin-top: 2rem;
+    color: #2a5d9f;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.card {
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 240px;
+    transition: transform 0.2s;
+    position: relative;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+}
+
+.card-header {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.card-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+}
+
+.card-buttons button {
+    border: none;
+    border-radius: 6px;
+    padding: 0.3rem 0.6rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: white;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+/* カード色 */
+.income-card {
+    background-color: #d0f0fd;
+}
+
+.expense-card {
+    background-color: #fdd0d0;
+}
+
+.goal-card {
+    background-color: #d8f7d8;
+}
+
+/* ボタン色（濃いめ） */
+.income-card .card-buttons button {
+    background-color: #3b8ed0;
+}
+
+.income-card .card-buttons button:hover {
+    background-color: #276899;
+}
+
+.expense-card .card-buttons button {
+    background-color: #e74c4c;
+}
+
+.expense-card .card-buttons button:hover {
+    background-color: #b03a3a;
+}
+
+.goal-card .card-buttons button {
+    background-color: #4caf50;
+}
+
+.goal-card .card-buttons button:hover {
+    background-color: #357a38;
+}
+
+
+@media (max-width: 600px) {
+    .cards {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+
+/* 共通カード設定 */
+.edit-card {
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 500px;
+    margin: 20px auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: #333;
+}
+
+/* カードごとの色分け */
+.income-card {
+    background-color: #cce5ff;
+}
+
+/* 水色系 */
+.expense-card {
+    background-color: #ffcccc;
+}
+
+/* 赤系 */
+.goal-card {
+    background-color: #ccffcc;
+}
+
+/* 緑系 */
+
+/* カード内見出し */
+.edit-card h2 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* フォーム項目 */
+.edit-card label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.edit-card input,
+.edit-card select,
+.edit-card textarea {
+    width: 100%;
+    padding: 8px 10px;
+    margin-top: 5px;
     border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* ボタン */
+.edit-card button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+}
+
+/* ボタン色分け */
+.income-btn {
+    background-color: #3399ff;
+}
+
+/* 収入 */
+.expense-btn {
+    background-color: #ff3333;
+}
+
+/* 支出 */
+.goal-btn {
+    background-color: #33cc33;
+}
+
+/* 貯金目標 */
+
+
+
+/* フォーム全体のカード風デザイン */
+form.card-form {
+    background-color: #f7f9fc;
+    /* ベースは淡い寒色 */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+/* フォームヘッダー */
+form.card-form h1 {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+}
+
+/* ラベルと入力欄 */
+form.card-form label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+form.card-form input[type="text"],
+form.card-form input[type="number"],
+form.card-form input[type="date"],
+form.card-form select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 3px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/* 増減ボタン */
+.amount-btn {
+    padding: 5px 10px;
+    margin: 2px;
+    border-radius: 5px;
+    border: none;
+    font-weight: bold;
+    color: white;
     cursor: pointer;
 }
 
-.delete-btn {
-    background-color: #ff4d4f;
+/* 色分け */
+.income-form .amount-btn {
+    background-color: #5dade2;
+}
+
+/* 水色系 */
+.expense-form .amount-btn {
+    background-color: #e74c3c;
+}
+
+/* 赤系 */
+.goal-form .amount-btn {
+    background-color: #58d68d;
+}
+
+/* 緑系 */
+
+/* ボタンホバーで少し濃く */
+.income-form .amount-btn:hover {
+    background-color: #3498db;
+}
+
+.expense-form .amount-btn:hover {
+    background-color: #c0392b;
+}
+
+.goal-form .amount-btn:hover {
+    background-color: #27ae60;
+}
+
+/* 送信ボタン */
+form.card-form button[type="submit"] {
+    background-color: #34495e;
+    /* 落ち着いた色 */
     color: white;
-    border: none;
-    padding: 5px 10px;
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
     border-radius: 5px;
+    border: none;
+    font-size: 1em;
     cursor: pointer;
+}
+
+form.card-form button[type="submit"]:hover {
+    background-color: #2c3e50;
+}
+
+/* ダッシュボードへ戻るリンク */
+form.card-form a {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    color: #34495e;
+    text-decoration: none;
+}
+
+form.card-form a:hover {
+    text-decoration: underline;
+}
+
+.back-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #9ac6f2;
+    /* 水色系パステル */
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.back-btn:hover {
+    background-color: #7fb0e0;
+    /* ホバー時少し濃く */
 }

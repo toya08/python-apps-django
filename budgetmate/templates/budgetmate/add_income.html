@@ -1,19 +1,41 @@
-<!DOCTYPE html>
-<html lang="ja">
+{% load static %}
+<link rel="stylesheet" href="{% static 'budgetmate/style.css' %}">
 
-<head>
-    <meta charset="UTF-8">
-    <title>収入を追加</title>
-</head>
+<h1>収入を追加</h1>
+<form method="post" class="card-form income-form">
+    {% csrf_token %}
 
-<body>
-    <h1>収入を追加</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">登録</button>
-    </form>
-    <a href="{% url 'dashboard' %}">ダッシュボードに戻る</a>
-</body>
+    <p>
+        {{ form.date.label_tag }}<br>
+        {{ form.date }}
+    </p>
 
-</html>
+    <p>
+        {{ form.source.label_tag }}<br>
+        {{ form.source }}
+    </p>
+
+    <p>
+        {{ form.amount.label_tag }}<br>
+        <input type="number" id="income-amount" name="amount" value="{{ form.amount.value }}" min="0" step="1">
+        <button type="button" class="amount-btn"
+            onclick="document.getElementById('income-amount').stepUp(10)">＋1万</button>
+        <button type="button" class="amount-btn"
+            onclick="document.getElementById('income-amount').stepDown(10)">－1万</button>
+        <button type="button" class="amount-btn"
+            onclick="document.getElementById('income-amount').stepUp(1)">＋千</button>
+        <button type="button" class="amount-btn"
+            onclick="document.getElementById('income-amount').stepDown(1)">－千</button>
+    </p>
+
+    <p>
+        {{ form.memo.label_tag }}<br>
+        {{ form.memo }}
+    </p>
+
+    <button type="submit">追加</button>
+</form>
+
+
+<br>
+<a href="{% url 'dashboard' %}" class="back-btn">← ダッシュボードへ戻る</a>

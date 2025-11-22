@@ -1,58 +1,85 @@
-<h1>BudgetMate ダッシュボード</h1>
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
 
-<div>
-    <a href="{% url 'add_income' %}">
-        <button>＋ 収入を追加</button>
-    </a>
+<head>
+    <meta charset="UTF-8">
+    <title>BudgetMate ダッシュボード</title>
+    <link rel="stylesheet" href="{% static 'budgetmate/style.css' %}">
+</head>
 
-    <a href="{% url 'add_expense' %}">
-        <button>－ 支出を追加</button>
-    </a>
+<body>
+    <header>
+        <h1>BudgetMate</h1>
+    </header>
 
-    <a href="{% url 'add_saving_goal' %}">
-        <button>🎯 貯金目標を追加</button>
-    </a>
-</div>
+    <div class="buttons">
+        <a href="{% url 'add_income' %}"><button class="add-btn">＋ 収入を追加</button></a>
+        <a href="{% url 'add_expense' %}"><button class="add-btn">－ 支出を追加</button></a>
+        <a href="{% url 'add_saving_goal' %}"><button class="add-btn">🎯 貯金目標を追加</button></a>
+    </div>
 
-<hr>
+    <div class="card-container">
 
-<h2>収入</h2>
-<a href="{% url 'add_income' %}">
-    <button class="add-btn">追加</button>
-</a>
+        <h2>収入</h2>
+        <div class="cards">
+            {% for i in incomes %}
+            <div class="card income-card">
+                <div class="card-header">💰 収入</div>
+                <p><strong>日付:</strong> {{ i.date|date:"Y年m月d日" }}</p>
+                <p><strong>種類:</strong> {{ i.source }}</p>
+                <p><strong>金額:</strong> {{ i.amount }}円</p>
+                <div class="bar" style="width: {{ i.amount|floatformat:0 }}px;"></div>
+                <div class="card-buttons">
+                    <a href="{% url 'edit_income' i.id %}"><button>📝</button></a>
+                    <a href="{% url 'delete_income' i.id %}"><button>🗑️</button></a>
+                </div>
+            </div>
+            {% empty %}
+            <p>まだ収入が登録されていません</p>
+            {% endfor %}
+        </div>
 
-<ul>
-    {% for i in incomes %}
-    <li>
-        {{ i.date }} - {{ i.source }} : {{ i.amount }}円
-        <a href="{% url 'delete_income' i.id %}">
-            <button class="delete-btn">削除</button>
-        </a>
-    </li>
-    {% endfor %}
-</ul>
+        <h2>支出</h2>
+        <div class="cards">
+            {% for e in expenses %}
+            <div class="card expense-card">
+                <div class="card-header">🛒 支出</div>
+                <p><strong>日付:</strong> {{ e.date|date:"Y年m月d日" }}</p>
+                <p><strong>カテゴリ:</strong> {{ e.category }}</p>
+                <p><strong>金額:</strong> {{ e.amount }}円</p>
+                <div class="bar" style="width: {{ e.amount|floatformat:0 }}px;"></div>
+                <div class="card-buttons">
+                    <a href="{% url 'edit_expense' e.id %}"><button>📝</button></a>
+                    <a href="{% url 'delete_expense' e.id %}"><button>🗑️</button></a>
+                </div>
+            </div>
+            {% empty %}
+            <p>まだ支出が登録されていません</p>
+            {% endfor %}
+        </div>
 
+        <h2>貯金目標</h2>
+        <div class="cards">
+            {% for g in goals %}
+            <div class="card goal-card">
+                <div class="card-header">🎯 目標</div>
+                <p><strong>目標:</strong> {{ g.goal_name }}</p>
+                <p><strong>目標金額:</strong> {{ g.target_amount }}円</p>
+                <p><strong>締切日:</strong> {{ g.target_date|date:"Y年m月d日" }}</p>
+                <p><strong>1ヶ月あたりの目安:</strong> {{ g.monthly_saving_amount }}円</p>
+                <div class="card-buttons">
+                    <a href="{% url 'edit_saving_goal' g.id %}"><button>📝</button></a>
+                    <a href="{% url 'delete_saving_goal' g.id %}"><button>🗑️</button></a>
+                </div>
+            </div>
+            {% empty %}
+            <p>まだ貯金目標が登録されていません</p>
+            {% endfor %}
+        </div>
 
-<h2>支出一覧</h2>
-{% for e in expenses %}
-<p>
-    {{ e.date }} - {{ e.category }}：{{ e.amount }}円
-    <a href="">
-        <button>削除</button>
-    </a>
-</p>
-{% empty %}
-<p>まだ支出が登録されていません</p>
-{% endfor %}
+    </div>
 
-<h2>貯金目標一覧</h2>
-{% for g in goals %}
-<p>
-    {{ g.goal_name }}：{{ g.target_amount }}円 ({{ g.target_date }}まで)
-    <a href="">
-        <button>削除</button>
-    </a>
-</p>
-{% empty %}
-<p>まだ貯金目標が登録されていません</p>
-{% endfor %}
+</body>
+
+</html>

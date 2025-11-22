@@ -1,9 +1,40 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'budgetmate/style.css' %}">
+
 <h1>支出を追加</h1>
-<form method="post">
+<form method="post" class="card-form expense-form">
     {% csrf_token %}
-    {{ form.as_p }}
+
+    <p>
+        {{ form.date.label_tag }}<br>
+        {{ form.date }}
+    </p>
+
+    <p>
+        {{ form.category.label_tag }}<br>
+        {{ form.category }}
+    </p>
+
+    <p>
+        {{ form.amount.label_tag }}<br>
+        <input type="number" id="expense-amount" name="amount" value="{{ form.amount.value }}" min="0" step="1">
+        <button type="button" class="amount-btn"
+            onclick="document.getElementById('expense-amount').stepUp(10)">＋1万</button>
+        <button type="button" class="amount-btn"
+            onclick="document.getElementById('expense-amount').stepDown(10)">－1万</button>
+        <button type="button" class="amount-btn"
+            onclick="document.getElementById('expense-amount').stepUp(1)">＋千</button>
+        <button type="button" class="amount-btn"
+            onclick="document.getElementById('expense-amount').stepDown(1)">－千</button>
+    </p>
+
+    <p>
+        {{ form.memo.label_tag }}<br>
+        {{ form.memo }}
+    </p>
+
     <button type="submit">追加</button>
 </form>
 
 <br>
-<a href="{% url 'dashboard' %}">← ダッシュボードへ戻る</a>
+<a href="{% url 'dashboard' %}" class="back-btn expense-back">← ダッシュボードへ戻る</a>

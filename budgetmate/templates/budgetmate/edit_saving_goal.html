@@ -1,0 +1,11 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'budgetmate/style.css' %}">
+
+<div class="edit-card goal-card">
+    <h2>貯金目標を編集</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="goal-btn">保存</button>
+    </form>
+</div>

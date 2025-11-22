@@ -30,8 +30,8 @@ class SavingGoal(models.Model):
     target_date = models.DateField(verbose_name="目標日")
     created_at = models.DateTimeField(auto_now_add=True)
 
-    def monthly_saving(self):
-        """残り期間から1ヶ月あたりの貯金目安を出す"""
+    @property
+    def monthly_saving_amount(self):
         today = timezone.now().date()
         months_left = max(
             (self.target_date.year - today.year) * 12

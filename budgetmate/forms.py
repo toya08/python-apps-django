@@ -5,12 +5,19 @@ from .models import Income, Expense, SavingGoal
 class IncomeForm(forms.ModelForm):
     class Meta:
         model = Income
-        fields = ["date", "amount", "source", "memo"]
+        fields = ["date", "source", "amount", "memo"]
         widgets = {
+            "amount": forms.NumberInput(
+                attrs={
+                    "step": 1000,  # 千円単位で増減
+                    "min": 0,
+                    "id": "income-amount",
+                    "placeholder": "例: 10000",
+                }
+            ),
             "date": forms.DateInput(attrs={"type": "date"}),
-            "amount": forms.NumberInput(attrs={"min": 0}),
             "source": forms.TextInput(attrs={"placeholder": "例: バイト代"}),
-            "memo": forms.Textarea(attrs={"rows": 2}),
+            "memo": forms.Textarea(attrs={"rows": 2, "placeholder": "メモ"}),
         }
 
 

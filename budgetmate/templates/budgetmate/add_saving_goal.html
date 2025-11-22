@@ -1,11 +1,35 @@
-<h1>貯金目標を追加</h1>
+{% load static %}
+<link rel="stylesheet" href="{% static 'budgetmate/style.css' %}">
 
-<form method="POST">
+<h1>貯金目標を追加</h1>
+<form method="post" class="card-form goal-form">
     {% csrf_token %}
-    {{ form.as_p }}
+
+    <p>
+        {{ form.goal_name.label_tag }}<br>
+        {{ form.goal_name }}
+    </p>
+
+    <p>
+        {{ form.target_amount.label_tag }}<br>
+        <input type="number" id="goal-amount" name="target_amount" value="{{ form.target_amount.value }}" min="0"
+            step="1">
+        <button type="button" class="amount-btn"
+            onclick="document.getElementById('goal-amount').stepUp(10)">＋1万</button>
+        <button type="button" class="amount-btn"
+            onclick="document.getElementById('goal-amount').stepDown(10)">－1万</button>
+        <button type="button" class="amount-btn" onclick="document.getElementById('goal-amount').stepUp(1)">＋千</button>
+        <button type="button" class="amount-btn"
+            onclick="document.getElementById('goal-amount').stepDown(1)">－千</button>
+    </p>
+
+    <p>
+        {{ form.target_date.label_tag }}<br>
+        {{ form.target_date }}
+    </p>
+
     <button type="submit">追加</button>
 </form>
 
-
 <br>
-<a href="{% url 'dashboard' %}">← ダッシュボードへ戻る</a>
+<a href="{% url 'dashboard' %}" class="back-btn goal-back">← ダッシュボードへ戻る</a>
