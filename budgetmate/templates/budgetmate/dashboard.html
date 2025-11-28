@@ -4,81 +4,68 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>BudgetMate ダッシュボード</title>
+    <title>BudgetMate</title>
     <link rel="stylesheet" href="{% static 'budgetmate/style.css' %}">
 </head>
 
 <body>
-    <header>
+
+    <div class="sidebar">
         <h1>BudgetMate</h1>
-    </header>
 
-    <div class="buttons">
-        <a href="{% url 'add_income' %}"><button class="add-btn">＋ 収入を追加</button></a>
-        <a href="{% url 'add_expense' %}"><button class="add-btn">－ 支出を追加</button></a>
-        <a href="{% url 'add_saving_goal' %}"><button class="add-btn">🎯 貯金目標を追加</button></a>
+        <nav>
+            <a href="{% url 'add_income' %}" class="menu-btn">収入を追加</a>
+            <a href="{% url 'add_expense' %}" class="menu-btn">支出を追加</a>
+            <a href="{% url 'add_saving_goal' %}" class="menu-btn">貯金目標を追加</a>
+        </nav>
     </div>
 
-    <div class="card-container">
-
-        <h2>収入</h2>
-        <div class="cards">
+    <main>
+        <section>
+            <h2>収入一覧</h2>
             {% for i in incomes %}
-            <div class="card income-card">
-                <div class="card-header">💰 収入</div>
-                <p><strong>日付:</strong> {{ i.date|date:"Y年m月d日" }}</p>
-                <p><strong>種類:</strong> {{ i.source }}</p>
-                <p><strong>金額:</strong> {{ i.amount }}円</p>
-                <div class="bar" style="width: {{ i.amount|floatformat:0 }}px;"></div>
-                <div class="card-buttons">
-                    <a href="{% url 'edit_income' i.id %}"><button>📝</button></a>
-                    <a href="{% url 'delete_income' i.id %}"><button>🗑️</button></a>
+            <div class="item">
+                <p>{{ i.date }}｜{{ i.source }}｜{{ i.amount }}円</p>
+                <div class="item-buttons">
+                    <a href="{% url 'edit_income' i.id %}" class="edit-btn">編集</a>
+                    <a href="{% url 'delete_income' i.id %}" class="delete-btn">削除</a>
                 </div>
             </div>
             {% empty %}
-            <p>まだ収入が登録されていません</p>
+            <p>収入データはありません</p>
             {% endfor %}
-        </div>
+        </section>
 
-        <h2>支出</h2>
-        <div class="cards">
+        <section>
+            <h2>支出一覧</h2>
             {% for e in expenses %}
-            <div class="card expense-card">
-                <div class="card-header">🛒 支出</div>
-                <p><strong>日付:</strong> {{ e.date|date:"Y年m月d日" }}</p>
-                <p><strong>カテゴリ:</strong> {{ e.category }}</p>
-                <p><strong>金額:</strong> {{ e.amount }}円</p>
-                <div class="bar" style="width: {{ e.amount|floatformat:0 }}px;"></div>
-                <div class="card-buttons">
-                    <a href="{% url 'edit_expense' e.id %}"><button>📝</button></a>
-                    <a href="{% url 'delete_expense' e.id %}"><button>🗑️</button></a>
+            <div class="item">
+                <p>{{ e.date }}｜{{ e.category }}｜{{ e.amount }}円</p>
+                <div class="item-buttons">
+                    <a href="{% url 'edit_expense' e.id %}" class="edit-btn">編集</a>
+                    <a href="{% url 'delete_expense' e.id %}" class="delete-btn">削除</a>
                 </div>
             </div>
             {% empty %}
-            <p>まだ支出が登録されていません</p>
+            <p>支出データはありません</p>
             {% endfor %}
-        </div>
+        </section>
 
-        <h2>貯金目標</h2>
-        <div class="cards">
+        <section>
+            <h2>貯金目標</h2>
             {% for g in goals %}
-            <div class="card goal-card">
-                <div class="card-header">🎯 目標</div>
-                <p><strong>目標:</strong> {{ g.goal_name }}</p>
-                <p><strong>目標金額:</strong> {{ g.target_amount }}円</p>
-                <p><strong>締切日:</strong> {{ g.target_date|date:"Y年m月d日" }}</p>
-                <p><strong>1ヶ月あたりの目安:</strong> {{ g.monthly_saving_amount }}円</p>
-                <div class="card-buttons">
-                    <a href="{% url 'edit_saving_goal' g.id %}"><button>📝</button></a>
-                    <a href="{% url 'delete_saving_goal' g.id %}"><button>🗑️</button></a>
+            <div class="item">
+                <p>{{ g.goal_name }}｜目標 {{ g.target_amount }}円｜締切 {{ g.target_date }}</p>
+                <div class="item-buttons">
+                    <a href="{% url 'edit_saving_goal' g.id %}" class="edit-btn">編集</a>
+                    <a href="{% url 'delete_saving_goal' g.id %}" class="delete-btn">削除</a>
                 </div>
             </div>
             {% empty %}
-            <p>まだ貯金目標が登録されていません</p>
+            <p>貯金目標はありません</p>
             {% endfor %}
-        </div>
-
-    </div>
+        </section>
+    </main>
 
 </body>
 
