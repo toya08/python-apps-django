@@ -19,13 +19,13 @@
         {{ form.amount.label_tag }}<br>
         <input type="number" id="income-amount" name="amount" value="{{ form.amount.value }}" min="0" step="1">
         <button type="button" class="amount-btn"
-            onclick="document.getElementById('income-amount').stepUp(10)">＋1万</button>
+            onclick="document.getElementById('income-amount').stepUp(10000)">＋1万</button>
         <button type="button" class="amount-btn"
-            onclick="document.getElementById('income-amount').stepDown(10)">－1万</button>
+            onclick="document.getElementById('income-amount').stepDown(10000)">－1万</button>
         <button type="button" class="amount-btn"
-            onclick="document.getElementById('income-amount').stepUp(1)">＋千</button>
+            onclick="document.getElementById('income-amount').stepUp(1000)">＋千</button>
         <button type="button" class="amount-btn"
-            onclick="document.getElementById('income-amount').stepDown(1)">－千</button>
+            onclick="document.getElementById('income-amount').stepDown(1000)">－千</button>
     </p>
 
     <p>

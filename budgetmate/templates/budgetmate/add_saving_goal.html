@@ -15,12 +15,13 @@
         <input type="number" id="goal-amount" name="target_amount" value="{{ form.target_amount.value }}" min="0"
             step="1">
         <button type="button" class="amount-btn"
-            onclick="document.getElementById('goal-amount').stepUp(10)">＋1万</button>
+            onclick="document.getElementById('goal-amount').stepUp(10000)">＋1万</button>
         <button type="button" class="amount-btn"
-            onclick="document.getElementById('goal-amount').stepDown(10)">－1万</button>
-        <button type="button" class="amount-btn" onclick="document.getElementById('goal-amount').stepUp(1)">＋千</button>
+            onclick="document.getElementById('goal-amount').stepDown(10000)">－1万</button>
         <button type="button" class="amount-btn"
-            onclick="document.getElementById('goal-amount').stepDown(1)">－千</button>
+            onclick="document.getElementById('goal-amount').stepUp(1000)">＋千</button>
+        <button type="button" class="amount-btn"
+            onclick="document.getElementById('goal-amount').stepDown(1000)">－千</button>
     </p>
 
     <p>
